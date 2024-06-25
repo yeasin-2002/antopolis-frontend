@@ -30,8 +30,7 @@ interface FileWithPreview extends File {
 
 export const AddAnimal = ({ allCategory, ...props }: Props) => {
   const [name, setName] = useState("");
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
-  const [fileUrl, setFileUrl] = useState("");
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
   const { edgestore } = useEdgeStore();
   const [file, setFile] = useState<FileWithPreview | null>(null);
@@ -39,7 +38,7 @@ export const AddAnimal = ({ allCategory, ...props }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const comboboxItems = allCategory.map((item) => {
     return {
-      value: item._id,
+      value: item.name,
       label: item.name,
     };
   });
@@ -48,7 +47,7 @@ export const AddAnimal = ({ allCategory, ...props }: Props) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      if (!selectedCategoryId) return toast.error("please select category");
+      if (!selectedCategoryName) return toast.error("please select category");
       if (!file) return toast.error("please select image");
 
       // uploadImage
@@ -58,7 +57,7 @@ export const AddAnimal = ({ allCategory, ...props }: Props) => {
         method: "POST",
         body: JSON.stringify({
           name,
-          category: selectedCategoryId,
+          category: selectedCategoryName,
           image: res.url,
         }),
         headers: { "Content-Type": "application/json" },
@@ -67,6 +66,10 @@ export const AddAnimal = ({ allCategory, ...props }: Props) => {
       if (data.success) {
         toast.success("succfully added animal");
         revalidatePath_server("/");
+        setName("");
+        setSelectedCategoryName("");
+        setFile(null);
+
         return setIsCloseDialog(false);
       }
       throw new Error("unable to add animal");
@@ -103,8 +106,8 @@ export const AddAnimal = ({ allCategory, ...props }: Props) => {
 
           <Combobox
             frameworks={comboboxItems}
-            value={selectedCategoryId}
-            setValue={setSelectedCategoryId}
+            value={selectedCategoryName}
+            setValue={setSelectedCategoryName}
           />
 
           <SelectImage file={file} setFile={setFile} />

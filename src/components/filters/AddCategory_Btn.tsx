@@ -52,7 +52,7 @@ export const AddCategory = ({ ...props }: Props) => {
           className: "!rounded-full",
         })}
       >
-        Add Animal
+        Add Category
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
