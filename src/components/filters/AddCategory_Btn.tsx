@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CategoryResponse } from "@/types";
+import { CategoryResponse_GET } from "@/types";
 import { baseUrl } from "@/utils";
 import toast from "react-hot-toast";
 
@@ -25,7 +25,7 @@ export const AddCategory = ({ ...props }: Props) => {
     e.preventDefault();
     try {
       const name = (e.currentTarget[0] as HTMLInputElement).value;
-      console.log("🚀 ~ handleSubmit ~ name:", name);
+
       const req = await fetch(`${baseUrl}/category`, {
         method: "POST",
         headers: {
@@ -33,12 +33,11 @@ export const AddCategory = ({ ...props }: Props) => {
         },
         body: JSON.stringify({ name }),
       });
-      const data = (await req.json()) as CategoryResponse;
+      const data = (await req.json()) as CategoryResponse_GET;
       if (data.success) {
-        console.log("🚀 ~ handleSubmit ~ data:", data);
         toast.success("added category");
         revalidatePath_server("/");
-        setIsDialogOpen(false);
+        return setIsDialogOpen(false);
       }
       throw new Error("unable to add category");
     } catch (error) {
@@ -58,20 +57,20 @@ export const AddCategory = ({ ...props }: Props) => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add Category</DialogTitle>
-          <form className="space-y-5 py-4" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Animal Name"
-              className="input-items"
-            />
-            <Button
-              type="submit"
-              className="input-items inline-flex items-center justify-center cursor-pointer rounded-lg"
-            >
-              Add
-            </Button>
-          </form>
         </DialogHeader>
+        <form className="space-y-5 py-4" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Animal Name"
+            className="input-items"
+          />
+          <Button
+            type="submit"
+            className="input-items inline-flex items-center justify-center cursor-pointer rounded-lg"
+          >
+            Add
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   );

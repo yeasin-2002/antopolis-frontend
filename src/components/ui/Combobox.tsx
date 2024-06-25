@@ -19,29 +19,6 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/utils";
 
-// const frameworks = [
-//   {
-//     value: "next.js",
-//     label: "Next.js",
-//   },
-//   {
-//     value: "sveltekit",
-//     label: "SvelteKit",
-//   },
-//   {
-//     value: "nuxt.js",
-//     label: "Nuxt.js",
-//   },
-//   {
-//     value: "remix",
-//     label: "Remix",
-//   },
-//   {
-//     value: "astro",
-//     label: "Astro",
-//   },
-// ];
-
 interface Props {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -66,11 +43,11 @@ export function Combobox({ frameworks = [], setValue, value }: Props) {
         >
           {value
             ? frameworks?.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+            : "Select category..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[200px] p-0 ">
         <Command>
           <CommandInput placeholder="Search framework..." />
           <CommandList>

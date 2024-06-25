@@ -9,6 +9,8 @@ export interface Category {
 }
 export interface Animal {
   _id: string;
+  category: string;
+  image: string;
   name: string;
 }
 

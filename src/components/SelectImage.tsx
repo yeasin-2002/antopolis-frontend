@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface FileWithPreview extends File {

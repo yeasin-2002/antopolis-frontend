@@ -1,4 +1,4 @@
-import { Animal, Category, CategoryResponse_GET } from "@/types";
+import { AnimalResponse_GET, CategoryResponse_GET } from "@/types";
 import { baseUrl } from "@/utils";
 
 export const getAllCategory = async () => {
@@ -9,6 +9,6 @@ export const getAllCategory = async () => {
 
 export const getAllAnimal = async () => {
   const categoryReq = (await fetch(`${baseUrl}/animal`)) || [];
-  const allCategory = (await categoryReq.json()) as Animal[];
+  const allCategory = (await categoryReq.json()) as AnimalResponse_GET;
   return allCategory;
 };
