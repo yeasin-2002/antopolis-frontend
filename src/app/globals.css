@@ -1,4 +1,9 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-items {
+    @apply p-2  bg-[#f3f3f2] rounded-lg w-full placeholder:px-2 placeholder:text-black/95 font-normal text-black ;
+  }
+}

@@ -4,15 +4,19 @@ import {
   AnimalItems,
   CategoryList,
 } from "@/components";
+import { getAllAnimal, getAllCategory } from "@/helpers";
 
-const RootPage = () => {
+const RootPage = async () => {
+  const allCategory = await getAllCategory();
+  const allAnimal = await getAllAnimal();
+
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <section className="bg-black min-h-screen  text-white p-20">
       <div className="flex items-center justify-between">
-        <CategoryList />
+        <CategoryList categories={allCategory.data} />
         <div className="flex items-center justify-center gap-x-2">
-          <AddAnimal />
+          <AddAnimal allCategory={allCategory.data} />
           <AddCategory />
         </div>
       </div>

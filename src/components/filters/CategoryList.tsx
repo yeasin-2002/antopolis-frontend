@@ -1,16 +1,18 @@
-interface Props extends React.ComponentProps<"div"> {}
+import { Category } from "@/types";
 
-const categories = ["All", "Dog", "Cat", "Bird"];
+interface Props extends React.ComponentProps<"div"> {
+  categories: Category[];
+}
 
-export const CategoryList = ({ ...props }: Props) => {
+export const CategoryList = ({ categories = [], ...props }: Props) => {
   return (
     <div {...props} className="space-x-8">
       {categories.map((items) => (
         <button
-          key={items}
+          key={items.name}
           className="border border-red-600 px-8 py-2 rounded-full text-red-600"
         >
-          {items}
+          {items.name}
         </button>
       ))}
     </div>
